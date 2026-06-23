@@ -124,7 +124,7 @@
                 <div class="text-xs font-mono text-slate-500">Professional Track // 2022 - 2026</div>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
                 <div class="group bg-card-purple p-5 sm:p-8 rounded-2xl blur-backdrop flex flex-col sm:flex-row items-start gap-4 sm:gap-6 transition-all duration-300 hover:border-accent-purple/40 shadow-xl">
                     <div class="text-xl sm:text-2xl text-accent-purple bg-accent-purple/10 p-3 sm:p-4 rounded-xl transition-all duration-300 group-hover:bg-accent-purple group-hover:text-white shrink-0">
                         <i class="fa-solid fa-laptop-code"></i>
@@ -369,7 +369,6 @@
 
         function toggleMenu() {
             mobileMenu.classList.toggle('hidden');
-            // Dynamically morph icon between hamburger lines and a close cross icon
             if (mobileMenu.classList.contains('hidden')) {
                 menuIcon.className = 'fa-solid fa-bars';
             } else {
@@ -379,7 +378,6 @@
 
         menuBtn.addEventListener('click', toggleMenu);
 
-        // Closes full overlay layout if mobile navigation link target is touched
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
