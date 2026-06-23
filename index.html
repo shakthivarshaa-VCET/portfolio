@@ -47,13 +47,6 @@
             width: 100%;
             overflow-x: hidden;
         }
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
     </style>
 </head>
 <body class="bg-bg-dark text-slate-100 font-sans antialiased relative max-w-full selection:bg-accent-purple selection:text-white">
@@ -70,24 +63,37 @@
         <a href="#contact" class="text-slate-400 hover:text-accent-purple transition-all duration-300 text-xl hover:scale-125" title="Contact"><i class="fa-solid fa-envelope"></i></a>
     </div>
 
-    <nav class="fixed top-0 left-0 w-full px-4 md:px-[10%] py-4 bg-bg-dark/80 blur-backdrop border-b border-purple-500/10 z-40 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
-        <div class="text-base sm:text-xl font-black tracking-widest uppercase text-slate-100 shrink-0">
+    <nav class="fixed top-0 left-0 w-full px-6 md:px-[10%] py-5 bg-bg-dark/80 blur-backdrop border-b border-purple-500/10 z-40 flex items-center justify-between">
+        <div class="text-xl font-black tracking-widest uppercase text-slate-100 shrink-0">
             Shakthi <span class="text-accent-purple">Varshaa</span>
         </div>
-        <div class="w-full sm:w-auto overflow-x-auto no-scrollbar flex justify-center">
-            <ul class="flex items-center gap-5 sm:gap-8 list-none text-xs font-semibold tracking-wider uppercase whitespace-nowrap px-2">
-                <li><a href="#home" class="text-slate-400 hover:text-white transition-colors duration-300">Home</a></li>
-                <li><a href="#experience" class="text-slate-400 hover:text-white transition-colors duration-300">About</a></li>
-                <li><a href="#skills" class="text-slate-400 hover:text-white transition-colors duration-300">Skills</a></li>
-                <li><a href="#projects" class="text-slate-400 hover:text-white transition-colors duration-300">Work</a></li>
-                <li><a href="#contact" class="text-slate-400 hover:text-white transition-colors duration-300">Contact</a></li>
+        
+        <ul class="hidden sm:flex items-center gap-8 list-none text-xs font-semibold tracking-wider uppercase whitespace-nowrap">
+            <li><a href="#home" class="text-slate-400 hover:text-white transition-colors duration-300">Home</a></li>
+            <li><a href="#experience" class="text-slate-400 hover:text-white transition-colors duration-300">About</a></li>
+            <li><a href="#skills" class="text-slate-400 hover:text-white transition-colors duration-300">Skills</a></li>
+            <li><a href="#projects" class="text-slate-400 hover:text-white transition-colors duration-300">Work</a></li>
+            <li><a href="#contact" class="text-slate-400 hover:text-white transition-colors duration-300">Contact</a></li>
+        </ul>
+
+        <button id="menu-btn" class="sm:hidden text-slate-100 hover:text-accent-purple text-xl p-2 focus:outline-none z-50" aria-label="Toggle Menu">
+            <i class="fa-solid fa-bars" id="menu-icon"></i>
+        </button>
+
+        <div id="mobile-menu" class="hidden fixed inset-0 w-screen h-screen bg-bg-dark/95 blur-backdrop z-40 flex flex-col items-center justify-center transition-all duration-300">
+            <ul class="flex flex-col items-center gap-8 list-none text-lg font-bold tracking-widest uppercase">
+                <li><a href="#home" class="mobile-link text-slate-300 hover:text-accent-purple transition-colors duration-300">Home</a></li>
+                <li><a href="#experience" class="mobile-link text-slate-300 hover:text-accent-purple transition-colors duration-300">About</a></li>
+                <li><a href="#skills" class="mobile-link text-slate-300 hover:text-accent-purple transition-colors duration-300">Skills</a></li>
+                <li><a href="#projects" class="mobile-link text-slate-300 hover:text-accent-purple transition-colors duration-300">Work</a></li>
+                <li><a href="#contact" class="mobile-link text-slate-300 hover:text-accent-purple transition-colors duration-300">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="w-full max-w-[1100px] mx-auto px-4 sm:px-8 xl:pl-28 box-border overflow-x-hidden">
         
-        <section id="home" class="pt-32 sm:pt-44 pb-16 sm:pb-24 min-h-screen flex flex-col justify-center relative">
+        <section id="home" class="pt-40 pb-16 sm:pb-24 min-h-screen flex flex-col justify-center relative">
             <div class="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 animate-float">
                 <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full border border-accent-purple shadow-[0_0_25px_rgba(158,117,255,0.4)] overflow-hidden bg-bg-dark flex items-center justify-center shrink-0">
                     <img src="varshaa.png" alt="Shakthi Varshaa R" class="w-full h-full object-cover object-top scale-105" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=Shakthi';">
@@ -354,6 +360,33 @@
         </footer>
 
     </div>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+            // Dynamically morph icon between hamburger lines and a close cross icon
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.className = 'fa-solid fa-bars';
+            } else {
+                menuIcon.className = 'fa-solid fa-xmark';
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        // Closes full overlay layout if mobile navigation link target is touched
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.className = 'fa-solid fa-bars';
+            });
+        });
+    </script>
 
 </body>
 </html>
